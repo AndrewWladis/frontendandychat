@@ -41,6 +41,12 @@ input {
     display: flex;
 }
 
+#send-button {
+    max-width: 50px;
+    max-height: 50px;
+    padding-left: 1%;
+}
+
 #message-input {
     flex-grow: 1;
 }
