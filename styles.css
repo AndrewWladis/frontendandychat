@@ -13,19 +13,18 @@ input {
 
 #logoText {
     margin-top: 20%;
-    font-size: 60px;
+    font-size: 3em;
     font-family: 'Lato', sans-serif;
     color: white;
 }
 
 #message-container {
     width: 100%;
-    max-width: 1200px;
 }
 
 #message-container div {
     border-top: 0.5px solid black;
-    font-size: 30px;
+    font-size: 20px;
     font-family: 'Open Sans', sans-serif;
     color: white;
     width: 100%;
@@ -37,11 +36,39 @@ input {
     position: fixed;
     padding-bottom: 30px;
     bottom: 0;
-    max-width: 1200px;
-    width: 80%;
+    width: 40vh;
+    margin-left: 0;
     display: flex;
 }
 
 #message-input {
     flex-grow: 1;
+}
+
+@media screen and (max-width: 600px) {
+    input {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 20px;
+    }
+
+    #logoText {
+        margin-top: 50%;
+        font-size: 2.5rem;
+        font-family: 'Lato', sans-serif;
+        color: white;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    input {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 15px;
+    }
+
+    #logoText {
+        margin-top: 50%;
+        font-size: 2rem;
+        font-family: 'Lato', sans-serif;
+        color: white;
+    }
 }
