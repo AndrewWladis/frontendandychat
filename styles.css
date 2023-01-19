@@ -36,7 +36,7 @@ input {
     position: fixed;
     padding-bottom: 30px;
     bottom: 0;
-    width: 40vh;
+    width: 80%;
     margin-left: 0;
     display: flex;
 }
