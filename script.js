@@ -5,7 +5,6 @@ const messageInput = document.getElementById('message-input')
 const params = new URLSearchParams(window.location.search);
 let nameParam = params.get('name');
 
-
 appendMessage('You joined')
 socket.emit('new-user', nameParam)
 
@@ -37,5 +36,8 @@ function appendMessage(message) {
   } else {
     messageElement.style.backgroundColor = '#b3d0ff'
   }
-  messageContainer.append(messageElement)
+  if (messageContainer.children.length > 17) {
+    messageContainer.children[0].remove()
+  }
+  messageContainer.append(messageElement);
 }

@@ -20,6 +20,7 @@ input {
 
 #message-container {
     width: 100%;
+    max-height: 500px;
 }
 
 #message-container div {
@@ -42,9 +43,9 @@ input {
 }
 
 #send-button {
-    max-width: 50px;
-    max-height: 50px;
-    padding-left: 1%;
+    margin: 1%;
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
 }
 
 #message-input {
