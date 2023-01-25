@@ -50,7 +50,7 @@ function appendMessage(message) {
   } else {
     messageElement.style.backgroundColor = '#b3d0ff'
   }
-  if (messageContainer.children.length > 17) {
+  if (messageContainer.children.length > 15) {
     messageContainer.children[0].remove()
   }
   messageContainer.append(messageElement);
@@ -73,7 +73,7 @@ function andimojiFunc(andimojiEx, person) {
   messageElement.innerText = `${person}: `;
   messageElement.append(andimoji);
   messageElement.classList.add('flex-class');
-  if (messageContainer.children.length > 17) {
+  if (messageContainer.children.length > 15) {
     messageContainer.children[0].remove()
   }
   messageContainer.append(messageElement);
