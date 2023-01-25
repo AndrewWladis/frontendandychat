@@ -73,7 +73,7 @@ function appendMessage(message) {
 
 function andimojiFunc(andimojiEx, person) {
   const messageElement = document.createElement('div')
-  messageElement.innerText = message;
+
   if (canType) {
     const andimoji = document.createElement('img');
     andimoji.classList.add('andymoji');
