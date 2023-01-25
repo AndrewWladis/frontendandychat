@@ -71,8 +71,11 @@ function andimojiFunc(andimojiEx, person) {
     messageElement.style.backgroundColor = '#b3d0ff'
   }
   messageElement.innerText = `${person}: `;
-  messageElement.append(andimoji)
-  messageElement.classList.add('flex-class')
+  messageElement.append(andimoji);
+  messageElement.classList.add('flex-class');
+  if (messageContainer.children.length > 17) {
+    messageContainer.children[0].remove()
+  }
   messageContainer.append(messageElement);
 }
 
