@@ -5,7 +5,7 @@ const messageInput = document.getElementById('message-input');
 const modalTrigger = document.getElementById('modal-trigger');
 const modal = document.getElementById("myModal");
 const params = new URLSearchParams(window.location.search);
-const pics = ['AndyMojis/waltuh.png', 'AndyMojis/chugjug.png', 'AndyMojis/crab.png', 'AndyMojis/waternoose.png', 'AndyMojis/herobrine.png']
+const pics = ['AndyMojis/waltuh.png', 'AndyMojis/bluecrystal.png', 'AndyMojis/chugjug.png', 'AndyMojis/crab.png', 'AndyMojis/waternoose.png', 'AndyMojis/herobrine.png']
 let nameParam = params.get('name');
 
 appendMessage('You joined')
@@ -105,6 +105,11 @@ document.getElementById('herobrine').onclick = function() {
 document.getElementById('chugjug').onclick = function() {
   andimojiFunc('chugjug', 'You')
   socket.emit('send-andymoji', 'chugjug')
+}
+
+document.getElementById('bluecrystal').onclick = function() {
+  andimojiFunc('bluecrystal', 'You')
+  socket.emit('send-andymoji', 'bluecrystal')
 }
 
 modalTrigger.src = pics[Math.floor(Math.random() * pics.length)];
