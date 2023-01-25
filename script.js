@@ -97,7 +97,7 @@ function andimojiFunc(andimojiEx, person) {
     messageElement.innerText = 'No Spam! You can only send a message every 5 seconds'
     messageContainer.append(messageElement);
   }
-  checkForMessageLimit()
+  checkForMessageLimit();
 }
 
 
