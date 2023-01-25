@@ -5,7 +5,7 @@ const messageInput = document.getElementById('message-input');
 const modalTrigger = document.getElementById('modal-trigger');
 const modal = document.getElementById("myModal");
 const params = new URLSearchParams(window.location.search);
-const pics = ['AndyMojis/waltuh.png', 'AndyMojis/bluecrystal.png', 'AndyMojis/chugjug.png', 'AndyMojis/crab.png', 'AndyMojis/waternoose.png', 'AndyMojis/herobrine.png']
+const pics = ['AndyMojis/waltuh.png', 'AndyMojis/skull.png', 'AndyMojis/bluecrystal.png', 'AndyMojis/chugjug.png', 'AndyMojis/crab.png', 'AndyMojis/waternoose.png', 'AndyMojis/herobrine.png']
 let canType = true;
 let nameParam = params.get('name');
 
@@ -131,6 +131,11 @@ document.getElementById('chugjug').onclick = function() {
 document.getElementById('bluecrystal').onclick = function() {
   andimojiFunc('bluecrystal', 'You')
   socket.emit('send-andymoji', 'bluecrystal')
+}
+
+document.getElementById('skull').onclick = function() {
+  andimojiFunc('skull', 'You')
+  socket.emit('send-andymoji', 'skull')
 }
 
 modalTrigger.src = pics[Math.floor(Math.random() * pics.length)];
