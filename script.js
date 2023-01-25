@@ -6,6 +6,7 @@ const modalTrigger = document.getElementById('modal-trigger');
 const modal = document.getElementById("myModal");
 const params = new URLSearchParams(window.location.search);
 const pics = ['AndyMojis/waltuh.png', 'AndyMojis/bluecrystal.png', 'AndyMojis/chugjug.png', 'AndyMojis/crab.png', 'AndyMojis/waternoose.png', 'AndyMojis/herobrine.png']
+let canType = true;
 let nameParam = params.get('name');
 
 appendMessage('You joined')
@@ -41,42 +42,61 @@ messageForm.addEventListener('submit', e => {
 
 function appendMessage(message) {
   const messageElement = document.createElement('div')
-  messageElement.innerText = message;
-  if (message.startsWith("You")){
-    messageElement.style.backgroundColor = '#3f6296'
-  } else if (message == 'No messages can be over 150 characters!'){
+  if (canType) {
+    messageElement.innerText = message;
+    if (message.startsWith("You")){
+      messageElement.style.backgroundColor = '#3f6296'
+    } else if (message == 'No messages can be over 150 characters!'){
+      messageElement.style.backgroundColor = '#3f6296'
+      messageElement.style.color = '#f79494';
+    } else {
+      messageElement.style.backgroundColor = '#b3d0ff'
+    }
+    if (messageContainer.children.length > 15) {
+      messageContainer.children[0].remove()
+    }
+    messageContainer.append(messageElement);
+    canType = false;
+    setInterval(function () {canType = true}, 5000);
+  } else {
     messageElement.style.backgroundColor = '#3f6296'
     messageElement.style.color = '#f79494';
-  } else {
-    messageElement.style.backgroundColor = '#b3d0ff'
+    messageElement.innerText = 'No Spam! You can only send a message every 5 seconds'
+    messageContainer.append(messageElement);
   }
-  if (messageContainer.children.length > 15) {
-    messageContainer.children[0].remove()
-  }
-  messageContainer.append(messageElement);
 }
 
 
 function andimojiFunc(andimojiEx, person) {
-  const andimoji = document.createElement('img');
-  andimoji.classList.add('andymoji');
-  modal.style.display = "none";
   const messageElement = document.createElement('div')
-  messageElement.innerText = 'You: ';
-  andimoji.src = `AndyMojis/${andimojiEx}.png`
-
-  if (person === 'You'){
-    messageElement.style.backgroundColor = '#3f6296'
+  messageElement.innerText = message;
+  if (canType) {
+    const andimoji = document.createElement('img');
+    andimoji.classList.add('andymoji');
+    modal.style.display = "none";
+    messageElement.innerText = 'You: ';
+    andimoji.src = `AndyMojis/${andimojiEx}.png`
+  
+    if (person === 'You'){
+      messageElement.style.backgroundColor = '#3f6296'
+    } else {
+      messageElement.style.backgroundColor = '#b3d0ff'
+    }
+    messageElement.innerText = `${person}: `;
+    messageElement.append(andimoji);
+    messageElement.classList.add('flex-class');
+    if (messageContainer.children.length > 15) {
+      messageContainer.children[0].remove()
+    }
+    messageContainer.append(messageElement);
+    canType = false;
+    setInterval(function () {canType = true}, 5000);
   } else {
-    messageElement.style.backgroundColor = '#b3d0ff'
+    messageElement.style.backgroundColor = '#3f6296'
+    messageElement.style.color = '#f79494';
+    messageElement.innerText = 'No Spam! You can only send a message every 5 seconds'
+    messageContainer.append(messageElement);
   }
-  messageElement.innerText = `${person}: `;
-  messageElement.append(andimoji);
-  messageElement.classList.add('flex-class');
-  if (messageContainer.children.length > 15) {
-    messageContainer.children[0].remove()
-  }
-  messageContainer.append(messageElement);
 }
 
 
