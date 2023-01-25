@@ -40,6 +40,12 @@ messageForm.addEventListener('submit', e => {
   }
 })
 
+function checkForMessageLimit() {
+  if (messageContainer.children.length > 15) {
+    messageContainer.children[0].remove()
+  }
+}
+
 function appendMessage(message) {
   const messageElement = document.createElement('div')
   if (canType) {
@@ -52,9 +58,6 @@ function appendMessage(message) {
     } else {
       messageElement.style.backgroundColor = '#b3d0ff'
     }
-    if (messageContainer.children.length > 15) {
-      messageContainer.children[0].remove()
-    }
     messageContainer.append(messageElement);
     canType = false;
     setInterval(function () {canType = true}, 5000);
@@ -64,6 +67,7 @@ function appendMessage(message) {
     messageElement.innerText = 'No Spam! You can only send a message every 5 seconds'
     messageContainer.append(messageElement);
   }
+  checkForMessageLimit()
 }
 
 
@@ -76,7 +80,6 @@ function andimojiFunc(andimojiEx, person) {
     modal.style.display = "none";
     messageElement.innerText = 'You: ';
     andimoji.src = `AndyMojis/${andimojiEx}.png`
-  
     if (person === 'You'){
       messageElement.style.backgroundColor = '#3f6296'
     } else {
@@ -85,9 +88,6 @@ function andimojiFunc(andimojiEx, person) {
     messageElement.innerText = `${person}: `;
     messageElement.append(andimoji);
     messageElement.classList.add('flex-class');
-    if (messageContainer.children.length > 15) {
-      messageContainer.children[0].remove()
-    }
     messageContainer.append(messageElement);
     canType = false;
     setInterval(function () {canType = true}, 5000);
@@ -97,6 +97,7 @@ function andimojiFunc(andimojiEx, person) {
     messageElement.innerText = 'No Spam! You can only send a message every 5 seconds'
     messageContainer.append(messageElement);
   }
+  checkForMessageLimit()
 }
 
 
