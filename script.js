@@ -41,7 +41,12 @@ messageForm.addEventListener('submit', e => {
 })
 
 function checkForMessageLimit() {
-  if (messageContainer.children.length > 15) {
+  let heightNum = 0;
+  Array.from(messageContainer.children).forEach(element => {
+    heightNum += element.offsetHeight;
+  });
+
+  if (heightNum > screen.height - messageForm.offsetHeight) {
     messageContainer.children[0].remove()
   }
 }
