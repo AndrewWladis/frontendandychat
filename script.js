@@ -42,12 +42,10 @@ messageForm.addEventListener('submit', e => {
         .then(response => response.json())
         .then(data => {
           appendMessage(`You: ${data[0].quote}`)
-          socket.emit('send-chat-message', data[0].quote)
         })
         .catch(error => console.error(error));
     } else {
       appendMessage(`You: ${message}`)
-      socket.emit('send-chat-message', message)
     }
     messageInput.value = ''
   } else {
@@ -72,6 +70,7 @@ function appendMessage(message) {
     messageElement.innerText = message;
     if (message.startsWith("You")){
       messageElement.style.backgroundColor = '#3f6296'
+      socket.emit('send-chat-message', message.substr(5))
     } else if (message == 'No messages can be over 150 characters!'){
       messageElement.style.backgroundColor = '#3f6296'
       messageElement.style.color = '#f79494';
