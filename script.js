@@ -66,25 +66,25 @@ function checkForMessageLimit() {
 
 function appendMessage(message) {
   const messageElement = document.createElement('div')
-  if (canType) {
-    messageElement.innerText = message;
-    if (message.startsWith("You")){
-      messageElement.style.backgroundColor = '#3f6296'
-      socket.emit('send-chat-message', message.substr(5))
-    } else if (message == 'No messages can be over 150 characters!'){
-      messageElement.style.backgroundColor = '#3f6296'
-      messageElement.style.color = '#f79494';
-    } else {
-      messageElement.style.backgroundColor = '#b3d0ff'
-    }
-    messageContainer.append(messageElement);
-    canType = false;
-    setInterval(function () {canType = true}, 5000);
+  messageElement.innerText = message;
+  if (message.startsWith("You") && canType){
+    messageElement.style.backgroundColor = '#3f6296'
+    socket.emit('send-chat-message', message.substr(5))
+  } else if (message == 'No messages can be over 150 characters!'){
+    messageElement.style.backgroundColor = '#3f6296'
+    messageElement.style.color = '#f79494';
   } else {
+    messageElement.style.backgroundColor = '#b3d0ff'
+  }
+  if (message.startsWith("You") && !canType) {
     messageElement.style.backgroundColor = '#3f6296'
     messageElement.style.color = '#f79494';
     messageElement.innerText = 'No Spam! You can only send a message every 5 seconds'
     messageContainer.append(messageElement);
+  } else {
+    messageContainer.append(messageElement);
+    canType = false;
+    setInterval(function () {canType = true}, 5000);
   }
   checkForMessageLimit()
 }
