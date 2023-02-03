@@ -13,7 +13,11 @@ appendMessage('You joined')
 socket.emit('new-user', nameParam)
 
 socket.on('chat-message', data => {
-  appendMessage(`${data.name}: ${data.message}`, data.color)
+  appendMessage(`${data.name}: ${data.message}`)
+})
+
+socket.on('send-breaking-bad-quote', data => {
+  appendMessage(`${data.name}: ${data.message}`)
 })
 
 socket.on('user-connected', name => {
@@ -32,8 +36,20 @@ messageForm.addEventListener('submit', e => {
   e.preventDefault()
   const message = messageInput.value
   if (message.length < 150) {
-    appendMessage(`You: ${message}`)
-    socket.emit('send-chat-message', message)
+    console.log(message)
+    if (message === 'jesse, we need to cook' || message === 'Jesse, we need to cook') {
+      fetch('https://api.breakingbadquotes.xyz/v1/quotes')
+        .then(response => response.json())
+        .then(data => {
+          appendMessage(`${data[0].author}: ${data[0].quote}`)
+          socket.emit('send-breaking-bad-quote', { author: data[0].author, quote: data[0].quote})
+        })
+        .catch(error => console.error(error));
+
+    } else {
+      appendMessage(`You: ${message}`)
+      socket.emit('send-chat-message', message)
+    }
     messageInput.value = ''
   } else {
     appendMessage('No messages can be over 150 characters!')
