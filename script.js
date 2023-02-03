@@ -41,11 +41,10 @@ messageForm.addEventListener('submit', e => {
       fetch('https://api.breakingbadquotes.xyz/v1/quotes')
         .then(response => response.json())
         .then(data => {
-          appendMessage(`${data[0].author}: ${data[0].quote}`)
-          socket.emit('send-breaking-bad-quote', { author: data[0].author, quote: data[0].quote})
+          appendMessage(`You: ${data[0].quote}`)
+          socket.emit('send-chat-message', data[0].quote)
         })
         .catch(error => console.error(error));
-
     } else {
       appendMessage(`You: ${message}`)
       socket.emit('send-chat-message', message)
