@@ -60,6 +60,7 @@ function checkForMessageLimit() {
   });
 
   if (heightNum > screen.height - messageForm.offsetHeight) {
+    messageContainer.children[1].remove()
     messageContainer.children[0].remove()
   }
 }
@@ -67,10 +68,7 @@ function checkForMessageLimit() {
 function appendMessage(message) {
   const messageElement = document.createElement('div')
   messageElement.innerText = message;
-  if (message.startsWith("You") && canType){
-    messageElement.style.backgroundColor = '#3f6296'
-    socket.emit('send-chat-message', message.substr(5))
-  } else if (message == 'No messages can be over 150 characters!'){
+  if (!canType message == 'No messages can be over 150 characters!'){
     messageElement.style.backgroundColor = '#3f6296'
     messageElement.style.color = '#f79494';
   } else {
