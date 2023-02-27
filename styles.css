@@ -107,8 +107,11 @@ input {
 
 #send-button {
     margin: 1%;
-    font-size: 20px;
+    font-size: 30px;
     font-family: 'Lato', sans-serif;
+    border: 0px;
+    background: rgb(219,219,219);
+    background: linear-gradient(90deg, rgba(219,219,219,1) 61%, rgba(189,189,189,1) 100%);
 }
 
 #submit {
@@ -121,6 +124,7 @@ input {
 
 #message-input {
     flex-grow: 1;
+    border: 0px;
 }
 
 @media screen and (max-width: 600px) {
