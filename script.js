@@ -13,11 +13,7 @@ appendMessage('You joined')
 socket.emit('new-user', nameParam)
 
 socket.on('chat-message', data => {
-  appendMessage(`${data.name}: ${data.message}`)
-})
-
-socket.on('send-breaking-bad-quote', data => {
-  appendMessage(`${data.name}: ${data.message}`)
+  appendMessage(`${data.name}: ${data.message}`, data.color)
 })
 
 socket.on('user-connected', name => {
@@ -36,17 +32,8 @@ messageForm.addEventListener('submit', e => {
   e.preventDefault()
   const message = messageInput.value
   if (message.length < 150) {
-    console.log(message)
-    if (message === 'jesse, we need to cook' || message === 'Jesse, we need to cook') {
-      fetch('https://api.breakingbadquotes.xyz/v1/quotes')
-        .then(response => response.json())
-        .then(data => {
-          appendMessage(`You: ${data[0].quote}`)
-        })
-        .catch(error => console.error(error));
-    } else {
-      appendMessage(`You: ${message}`)
-    }
+    appendMessage(`You: ${message}`)
+    socket.emit('send-chat-message', message)
     messageInput.value = ''
   } else {
     appendMessage('No messages can be over 150 characters!')
@@ -54,35 +41,31 @@ messageForm.addEventListener('submit', e => {
 })
 
 function checkForMessageLimit() {
-  let heightNum = 0;
-  Array.from(messageContainer.children).forEach(element => {
-    heightNum += element.offsetHeight;
-  });
-
-  if (heightNum > screen.height - messageForm.offsetHeight) {
-    messageContainer.children[1].remove()
-    messageContainer.children[0].remove()
+  if (messageContainer.children.length > 15) {
+    //TO DO
   }
 }
 
 function appendMessage(message) {
   const messageElement = document.createElement('div')
-  messageElement.innerText = message;
-  if (!canType && message == 'No messages can be over 150 characters!'){
-    messageElement.style.backgroundColor = '#3f6296'
-    messageElement.style.color = '#f79494';
+  if (canType && message != 'null left') {
+    messageElement.innerText = message;
+    if (message.startsWith("You")){
+      messageElement.style.backgroundColor = '#3f6296'
+    } else if (message == 'No messages can be over 150 characters!'){
+      messageElement.style.backgroundColor = '#3f6296'
+      messageElement.style.color = '#f79494';
+    } else {
+      messageElement.style.backgroundColor = '#b3d0ff'
+    }
+    messageContainer.append(messageElement);
+    canType = false;
+    setInterval(function () {canType = true}, 5000);
   } else {
-    messageElement.style.backgroundColor = '#b3d0ff'
-  }
-  if (message.startsWith("You") && !canType) {
     messageElement.style.backgroundColor = '#3f6296'
     messageElement.style.color = '#f79494';
     messageElement.innerText = 'No Spam! You can only send a message every 5 seconds'
     messageContainer.append(messageElement);
-  } else {
-    messageContainer.append(messageElement);
-    canType = false;
-    setInterval(function () {canType = true}, 5000);
   }
   checkForMessageLimit()
 }
