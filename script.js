@@ -68,7 +68,7 @@ function checkForMessageLimit() {
 function appendMessage(message) {
   const messageElement = document.createElement('div')
   messageElement.innerText = message;
-  if (!canType message == 'No messages can be over 150 characters!'){
+  if (!canType && message == 'No messages can be over 150 characters!'){
     messageElement.style.backgroundColor = '#3f6296'
     messageElement.style.color = '#f79494';
   } else {
