@@ -1,9 +1,4 @@
-const socket = io("https://api.example.com", {
-  withCredentials: true,
-  extraHeaders: {
-    "my-custom-header": "abcd"
-  }
-});
+const socket = io("https://andychat.onrender.com/");
 const messageForm = document.getElementById('send-container');
 const messageInput = document.getElementById('message-input');
 const modalTrigger = document.getElementById('modal-trigger');
