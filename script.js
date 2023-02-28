@@ -60,7 +60,8 @@ function appendMessage(message) {
     messageElement.innerText = message;
     if (message.startsWith("You")){
       messageElement.style.backgroundColor = '#3f6296'
-      if (message.startsWith("You:")){
+      if (message.startsWith("You: ")){
+        canType = false;
         setInterval(function () {canType = true}, 3000);
       }
     } else if (message == 'No messages can be over 150 characters!'){
@@ -70,7 +71,6 @@ function appendMessage(message) {
       messageElement.style.backgroundColor = '#b3d0ff'
     }
     messageContainer.append(messageElement);
-    canType = false;
   } else {
     messageElement.style.backgroundColor = '#3f6296'
     messageElement.style.color = '#f79494';
