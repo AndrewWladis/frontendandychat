@@ -26,10 +26,69 @@
         background: rgb(83,128,236);
         background: linear-gradient(90deg, rgba(83,128,236,1) 0%, rgba(53,92,255,1) 19%);
     }
+
+    .lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.75s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.75s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.75s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.75s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
   </style>
 </head>
 <body>
-  <div id="message-container"></div>
+  <div class="container">
+    <h1 id="loading-text">We are getting everything ready for you...</h1>
+    <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+  </div>
   <form id="send-container">
     <input type="text" id="message-input">
     <button type="submit" id="send-button">Send</button>
@@ -38,7 +97,7 @@
   <div id="myModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <h1>Click To Send An AndyMoji</h1>
+      <h1>Click To Send An AndyMoji©</h1>
       <div id="andymoji-container">
         <img class="andymoji" src="AndyMojis/waltuh.png" alt="waltuh" id="waltuh">
         <img class="andymoji" src="AndyMojis/waternoose.png" alt="waternoose" id="waternoose">

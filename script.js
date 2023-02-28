@@ -1,5 +1,4 @@
 const socket = io('https://andychat.onrender.com/');
-const messageContainer = document.getElementById('message-container');
 const messageForm = document.getElementById('send-container');
 const messageInput = document.getElementById('message-input');
 const modalTrigger = document.getElementById('modal-trigger');
@@ -8,12 +7,21 @@ const params = new URLSearchParams(window.location.search);
 const pics = ['AndyMojis/waltuh.png', 'AndyMojis/sigma.png', 'AndyMojis/joker.png', 'AndyMojis/lightbulb.png', 'AndyMojis/skull.png', 'AndyMojis/bluecrystal.png', 'AndyMojis/chugjug.png', 'AndyMojis/crab.png', 'AndyMojis/waternoose.png', 'AndyMojis/herobrine.png']
 let canType = true;
 let nameParam = params.get('name');
+let container = document.createElement('div');
+container.id = 'message-container';
+document.querySelector('.container').remove();
+document.body.prepend(container);
+const messageContainer = document.getElementById('message-container');
+appendMessage('You joined');
 
-appendMessage('You joined')
 socket.emit('new-user', nameParam)
 
 socket.on('chat-message', data => {
   appendMessage(`${data.name}: ${data.message}`, data.color)
+})
+
+socket.on('ban', data => {
+  console.log('banned! bruh')
 })
 
 socket.on('user-connected', name => {
@@ -52,6 +60,7 @@ function appendMessage(message) {
     messageElement.innerText = message;
     if (message.startsWith("You")){
       messageElement.style.backgroundColor = '#3f6296'
+      setInterval(function () {canType = true}, 5000);
     } else if (message == 'No messages can be over 150 characters!'){
       messageElement.style.backgroundColor = '#3f6296'
       messageElement.style.color = '#f79494';
@@ -60,7 +69,6 @@ function appendMessage(message) {
     }
     messageContainer.append(messageElement);
     canType = false;
-    setInterval(function () {canType = true}, 5000);
   } else {
     messageElement.style.backgroundColor = '#3f6296'
     messageElement.style.color = '#f79494';
