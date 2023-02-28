@@ -49,8 +49,8 @@ messageForm.addEventListener('submit', e => {
 })
 
 function checkForMessageLimit() {
-  if (messageContainer.children.length > 15) {
-    //TO DO
+  if (screen.height - 90 < messageContainer.children.length * 38) {
+    messageContainer.removeChild(messageContainer.getElementsByTagName('div')[0]);
   }
 }
 
@@ -72,7 +72,7 @@ function appendMessage(message) {
   } else {
     messageElement.style.backgroundColor = '#3f6296'
     messageElement.style.color = '#f79494';
-    messageElement.innerText = 'No Spam! You can only send a message every 5 seconds'
+    messageElement.innerText = 'No Spam! You can only send a message every 3 seconds'
     messageContainer.append(messageElement);
   }
   checkForMessageLimit()
