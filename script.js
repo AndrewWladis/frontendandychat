@@ -60,7 +60,7 @@ function appendMessage(message) {
     messageElement.innerText = message;
     if (message.startsWith("You")){
       messageElement.style.backgroundColor = '#3f6296'
-      setInterval(function () {canType = true}, 5000);
+      setInterval(function () {canType = true}, 3000);
     } else if (message == 'No messages can be over 150 characters!'){
       messageElement.style.backgroundColor = '#3f6296'
       messageElement.style.color = '#f79494';
