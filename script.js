@@ -8,6 +8,8 @@ const pics = ['AndyMojis/waltuh.png', 'AndyMojis/sigma.png', 'AndyMojis/joker.pn
 let canType = true;
 let nameParam = params.get('name');
 let container = document.createElement('div');
+let youcolor = '#3f6296';
+let othercolor = '#b3d0ff';
 container.id = 'message-container';
 document.querySelector('.container').remove();
 document.body.prepend(container);
@@ -18,10 +20,6 @@ socket.emit('new-user', nameParam)
 
 socket.on('chat-message', data => {
   appendMessage(`${data.name}: ${data.message}`, data.color)
-})
-
-socket.on('ban', data => {
-  console.log('banned! bruh')
 })
 
 socket.on('user-connected', name => {
@@ -54,25 +52,32 @@ function checkForMessageLimit() {
   }
 }
 
+function breakSomeBad() {
+  var breakingAudio = new Audio('SoundEffects/waltuh.mp3');
+  breakingAudio.play();
+  youcolor = 'rgb(63 150 104)';
+  othercolor = 'rgb(140 192 87)';
+}
+
 function appendMessage(message) {
   const messageElement = document.createElement('div')
   if (canType && message != 'null left') {
     messageElement.innerText = message;
     if (message.startsWith("You")){
-      messageElement.style.backgroundColor = '#3f6296'
+      messageElement.style.backgroundColor = youcolor
       if (message.startsWith("You: ")){
         canType = false;
         setInterval(function () {canType = true}, 3000);
       }
     } else if (message == 'No messages can be over 150 characters!'){
-      messageElement.style.backgroundColor = '#3f6296'
+      messageElement.style.backgroundColor = youcolor
       messageElement.style.color = '#f79494';
     } else {
-      messageElement.style.backgroundColor = '#b3d0ff'
+      messageElement.style.backgroundColor = othercolor
     }
     messageContainer.append(messageElement);
   } else {
-    messageElement.style.backgroundColor = '#3f6296'
+    messageElement.style.backgroundColor = youcolor
     messageElement.style.color = '#f79494';
     messageElement.innerText = 'No Spam! You can only send a message every 3 seconds'
     messageContainer.append(messageElement);
@@ -90,9 +95,9 @@ function andimojiFunc(andimojiEx, person) {
     messageElement.innerText = 'You: ';
     andimoji.src = `AndyMojis/${andimojiEx}.png`
     if (person === 'You'){
-      messageElement.style.backgroundColor = '#3f6296'
+      messageElement.style.backgroundColor = youcolor
     } else {
-      messageElement.style.backgroundColor = '#b3d0ff'
+      messageElement.style.backgroundColor = othercolor
     }
     messageElement.innerText = `${person}: `;
     messageElement.append(andimoji);
@@ -100,8 +105,12 @@ function andimojiFunc(andimojiEx, person) {
     messageContainer.append(messageElement);
     canType = false;
     setInterval(function () {canType = true}, 5000);
+    if (andimojiEx === 'sigma') {
+      var sigma = new Audio('SoundEffects/sigma.mp3');
+      sigma.play();
+    }
   } else {
-    messageElement.style.backgroundColor = '#3f6296'
+    messageElement.style.backgroundColor = youcolor
     messageElement.style.color = '#f79494';
     messageElement.innerText = 'No Spam! You can only send a message every 5 seconds'
     messageContainer.append(messageElement);
