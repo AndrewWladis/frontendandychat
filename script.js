@@ -1,4 +1,4 @@
-const socket = io('https://andychat.onrender.com/', { transports : ['websocket'] });
+const socket = io('https://andychat.onrender.com', { transports : ['websocket'] });
 const messageForm = document.getElementById('send-container');
 const messageInput = document.getElementById('message-input');
 const modalTrigger = document.getElementById('modal-trigger');
@@ -47,16 +47,10 @@ messageForm.addEventListener('submit', e => {
 })
 
 function checkForMessageLimit() {
-  if (screen.height - 90 < messageContainer.children.length * 38) {
+  if (screen.height - 90 < messageContainer.children.length * 45) {
     messageContainer.removeChild(messageContainer.getElementsByTagName('div')[0]);
   }
-}
-
-function breakSomeBad() {
-  var breakingAudio = new Audio('SoundEffects/waltuh.mp3');
-  breakingAudio.play();
-  youcolor = 'rgb(63 150 104)';
-  othercolor = 'rgb(140 192 87)';
+  console.log(screen.height, messageContainer.children.length * 38)
 }
 
 function appendMessage(message) {
